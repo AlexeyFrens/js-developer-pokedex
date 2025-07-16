@@ -7,18 +7,13 @@ function getPokemonIdFromUrl() {
     return params.get('id');
 }
 
-async function getSpeciesData (id) {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
-    return await response.json();
-}
-
 async function loadPokemonDetails() {
     const pokemonId = getPokemonIdFromUrl();
 
     if (pokemonId) {
         const [pokemonData, speciesData] = await Promise.all([
             fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`).then(res => res.json()),
-            getSpeciesData(pokemonId)
+            fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`).then(res => res.json())
         ]);
 
         content.innerHTML += renderPokemonDetails(pokemonData, speciesData);
