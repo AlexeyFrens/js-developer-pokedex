@@ -7,7 +7,7 @@ let offset = 0;
 
 function convertPokemonToLi(pokemon) {
     return `
-        <li class="pokemon ${pokemon.type}">
+        <li class="pokemon ${pokemon.type}" data-id="${pokemon.number}">
             <span class="number">#${pokemon.number}</span>
             <span class="name">${pokemon.name}</span>
 
@@ -43,5 +43,13 @@ loadMoreButton.addEventListener('click', () => {
         loadMoreButton.parentElement.removeChild(loadMoreButton)
     } else {
         loadPokemonItens(offset, limit)
+    }
+})
+
+pokemonList.addEventListener('click', (event) => {
+    const card = event.target.closest('.pokemon')
+    if (card) {
+        const id = card.dataset.id;
+        window.location.href = `pokemonDetails.html?id=${id}`
     }
 })
