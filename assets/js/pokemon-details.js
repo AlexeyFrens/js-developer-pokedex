@@ -1,6 +1,6 @@
 const content = document.querySelector('main')
 const pageTitle = document.querySelector('title')
-// const pageFavIcon = document.querySelector('link[rel="icon"]')
+const pageFavIcon = document.querySelector('link[rel="shortcut icon"]')
 
 function getPokemonIdFromUrl() {
     const params = new URLSearchParams(window.location.search);
@@ -24,6 +24,7 @@ async function loadPokemonDetails() {
         const [type] = pokemonData.types.map((typeSlot) => typeSlot.type.name);
         content.className = type;
         pageTitle.innerHTML = pokemonData.name;
+        pageFavIcon.href = pokemonData.sprites.other.dream_world.front_default;
     }
 }
 
